@@ -20,6 +20,21 @@ else(DEBUG)
     set(CMAKE_CXX_FLAGS "-w")
 endif(DEBUG)
 
-add_subdirectory("vendor/cpp-netlib")
+#add_subdirectory("vendor/cpp-netlib-0.10.1")
+
+include(ExternalProject)
+ExternalProject_Add(cppnetlib
+    #    URL ""
+    SOURCE_DIR "../vendor/cpp-netlib-0.10.1"
+    BUILD_IN_SOURCE 1
+    CONFIGURE_COMMAND
+    BUILD_COMMAND make -j4
+    INSTALL_COMMAND ""
+    )
+
+ExternalProject_Get_Property(cppnetlib INSTALL_DIR)
+set(CPPNL_DIR ${INSTALL_DIR})
+message(STATUS " CPPNL INSTALL DIR ")
+message(STATUS ${CPPNL_DIR})
 
 
