@@ -1,0 +1,16 @@
+# directories
+CMakeFiles
+
+# build files
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# output
+*.o
+
+# swap
+*.swp
+*.swo
+*.swn
+
