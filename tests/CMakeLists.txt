@@ -7,6 +7,7 @@ file(GLOB_RECURSE tent-client-source
 
 
 include_directories(../vendor/gtest-1.6.0/include)
+include_directories(../vendor/rapidjson/include)
 # add google test
 include(ExternalProject)
 ExternalProject_Add(googletest

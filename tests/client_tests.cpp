@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "post.hpp"
 
 TEST(INITIAL, TEST) {
 
