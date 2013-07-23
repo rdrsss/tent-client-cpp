@@ -141,6 +141,31 @@ public:
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
     JsonVal SerializeToValue();
+
+    const std::string& id() const               { return id_; }
+    const std::string& entity() const           { return entity_; } 
+    const std::string& original_entity() const  { return original_entity_; }
+    const std::string& published_at() const     { return published_at_; }
+    const std::string& received_at() const      { return received_at_; }
+    const std::string& type() const             { return type_; }
+
+    Version* version()          { return &version_; }
+    App* app()                  { return &app_; }
+    Permissions* permissions()  { return &permissions_; }
+    Content* content()          { return &content_; }
+
+    MentionList* mentions()         { return &mentions_; }
+    RefList*     refs()             { return &refs_; }
+    LicenseList* licenses()         { return &licenses_; }
+    AttachmentList* attachments()   { return &attachments_; }
+
+    void set_id(const std::string& id)                  { id_ = id; }
+    void set_entity(const std::string& ent)             { entity_ = ent; }
+    void set_original_entity(const std::string& ent)    { original_entity_ = ent; }
+    void set_type(const std::string& type)              { type_ = type; }
+
+    void set_public(const bool p) { permissions_.is_public = p; }
+
 private:
     std::string id_;                
     std::string entity_;            
@@ -149,12 +174,15 @@ private:
     std::string received_at_;        
     std::string type_;
 
-    Version         version_;
+    std::string base_type_;
+    std::string fragment_;
+
     MentionList     mentions_;
     RefList         refs_;
     LicenseList     licenses_;
     AttachmentList  attachments_;
 
+    Version         version_;
     App             app_;
     Permissions     permissions_;
     Content         content_;
