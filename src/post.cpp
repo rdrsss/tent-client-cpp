@@ -1,4 +1,6 @@
-#include "post.h"
+#include "post.hpp"
+
+namespace tent {
 
 Post::Post() {
 }
@@ -15,10 +17,6 @@ bool Post::Deserialize(JsonDoc& doc) {
     return false;
 }
 
-JsonVal Post::SerializeToValue() {
-    JsonVal val;
 
-    return val;
-}
-
+}//namespace
 

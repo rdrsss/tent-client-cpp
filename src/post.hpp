@@ -29,7 +29,6 @@ struct Group : public JsonSerializable {
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Permissions : public JsonSerializable {
@@ -38,7 +37,6 @@ struct Permissions : public JsonSerializable {
  
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();   
 };
 
 struct App : public JsonSerializable {
@@ -48,7 +46,6 @@ struct App : public JsonSerializable {
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Attachment : public JsonSerializable {
@@ -60,7 +57,6 @@ struct Attachment : public JsonSerializable {
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Content : public JsonSerializable {
@@ -71,7 +67,6 @@ struct Content : public JsonSerializable {
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct License : public JsonSerializable {
@@ -79,7 +74,6 @@ struct License : public JsonSerializable {
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Ref : public JsonSerializable {
@@ -91,7 +85,6 @@ struct Ref : public JsonSerializable {
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Mention : public JsonSerializable { // The entities and posts that this post mentions
@@ -104,7 +97,6 @@ struct Mention : public JsonSerializable { // The entities and posts that this p
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Parent : public JsonSerializable { // Parent versions
@@ -116,7 +108,6 @@ struct Parent : public JsonSerializable { // Parent versions
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 struct Version : public JsonSerializable { // Post version object
@@ -130,7 +121,6 @@ struct Version : public JsonSerializable { // Post version object
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 };
 
 class Post : public JsonSerializable {
@@ -140,7 +130,6 @@ public:
 
     bool Serialize(JsonDoc& doc);
     bool Deserialize(JsonDoc& doc);
-    JsonVal SerializeToValue();
 
     const std::string& id() const               { return id_; }
     const std::string& entity() const           { return entity_; } 

@@ -16,7 +16,6 @@ public:
 
     virtual bool Serialize(JsonDoc& doc) = 0;
     virtual bool Deserialize(JsonDoc& doc) = 0;
-    virtual JsonVal SerializeToValue() = 0; // rapidjson uses move semantics with values
 };
 
 }// namespace
