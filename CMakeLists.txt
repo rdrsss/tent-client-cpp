@@ -25,13 +25,10 @@ set(Boost_COMPONENTS
 
 find_package( Boost 1.51.0 REQUIRED ${Boost_COMPONENTS})
 
-message(STATUS "SOURCE DIR : ")
-message(STATUS ${tent-client-cpp_SOURCE_DIR})
-
 if(DEBUG)
-    set(CMAKE_CXX_FLAGS "-g3 -ggdb -Wall")
+    set(CMAKE_CXX_FLAGS "-std=c++11 -g3 -ggdb -Wall")
 else(DEBUG)
-    set(CMAKE_CXX_FLAGS "-w")
+    set(CMAKE_CXX_FLAGS "-std=c++11 -w")
 endif(DEBUG)
 
 if(TESTS)
