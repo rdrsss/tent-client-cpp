@@ -27,16 +27,19 @@ struct Group : public JsonSerializable {
     std::string post;
     EntityList  entities;
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
+
 };
 
 struct Permissions : public JsonSerializable {
     bool is_public;
     GroupList groups;
  
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct App : public JsonSerializable {
@@ -44,19 +47,21 @@ struct App : public JsonSerializable {
     std::string name;
     std::string url;
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct Attachment : public JsonSerializable {
-    std::string category;
-    std::string content_type;
-    std::string name;
-    std::string digest;
-    std::string size;
+    std::string category;       // Required
+    std::string content_type;   // Required
+    std::string name;           // Required
+    std::string digest;         // Import
+    std::string size;           // Import
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct Content : public JsonSerializable {
@@ -65,15 +70,17 @@ struct Content : public JsonSerializable {
     void PushBackValue(const std::string& key, JsonVal& val);
     void PushBackValue(const std::string& key, const std::string& val);
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct License : public JsonSerializable {
     std::string url;
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct Ref : public JsonSerializable {
@@ -83,8 +90,9 @@ struct Ref : public JsonSerializable {
     std::string version;
     std::string type;
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct Mention : public JsonSerializable { // The entities and posts that this post mentions
@@ -95,8 +103,9 @@ struct Mention : public JsonSerializable { // The entities and posts that this p
     std::string type;
     bool is_public;
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct Parent : public JsonSerializable { // Parent versions
@@ -106,8 +115,9 @@ struct Parent : public JsonSerializable { // Parent versions
     std::string post;
     std::string message;
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 };
 
 struct Version : public JsonSerializable { // Post version object
@@ -119,8 +129,11 @@ struct Version : public JsonSerializable { // Post version object
     void ClearParents()             { parents.clear(); }
     void PushBackParent(Parent& p)  { parents.push_back(p); }
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
+private:
+    void SerializeParentList(JsonVal& root, JsonAllocator& alloc);
 };
 
 class Post : public JsonSerializable {
@@ -128,8 +141,9 @@ public:
     Post();
     ~Post();
 
-    bool Serialize(JsonDoc& doc);
-    bool Deserialize(JsonDoc& doc);
+    void Serialize(JsonVal& root, JsonAllocator& alloc);
+    void Deserialize(JsonVal& root, JsonAllocator& alloc);
+    std::string SerializeAsString();
 
     const std::string& id() const               { return id_; }
     const std::string& entity() const           { return entity_; } 
