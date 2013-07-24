@@ -6,13 +6,13 @@ file(GLOB_RECURSE tent-client-source
     ${tent-client-cpp_SOURCE_DIR}/src/*.cpp)
 
 
-include_directories(../vendor/gtest-1.6.0/include)
-include_directories(../vendor/rapidjson/include)
+include_directories(${tent-client-cpp_SOURCE_DIR}/vendor/gtest-1.6.0/include)
+include_directories(${tent-client-cpp_SOURCE_DIR}/vendor/rapidjson/include)
 # add google test
 include(ExternalProject)
 ExternalProject_Add(googletest
     URL ""
-    SOURCE_DIR "../../vendor/gtest-1.6.0"
+    SOURCE_DIR "${tent-client-cpp_SOURCE_DIR}/vendor/gtest-1.6.0"
     BUILD_IN_SOURCE 0
     CONFIGURE_COMMAND
     BUILD_COMMAND make -j4

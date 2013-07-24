@@ -54,7 +54,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 include(ExternalProject)
 ExternalProject_Add(cppnetlib
     #    URL ""
-    SOURCE_DIR "../vendor/cpp-netlib-0.10.1"
+    SOURCE_DIR "${tent-client-cpp_SOURCE_DIR}/vendor/cpp-netlib-0.10.1"
     BUILD_IN_SOURCE 0
     CONFIGURE_COMMAND
     BUILD_COMMAND make -j4
