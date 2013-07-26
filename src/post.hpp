@@ -6,6 +6,9 @@
 #include <vector>
 #include "jsonserializable.hpp"
 
+/* See docs (https://tent.io/docs/posts) for more information about posts
+ */
+
 namespace tent { 
 
 struct Parent;
@@ -30,7 +33,8 @@ struct Group : public JsonSerializable {
     void Serialize(JsonVal& root, JsonAllocator& alloc);
     void Deserialize(JsonVal& root, JsonAllocator& alloc);
     std::string SerializeAsString();
-
+private:
+    void SerializeEntityList(JsonVal& root, JsonAllocator& alloc);
 };
 
 struct Permissions : public JsonSerializable {
@@ -170,25 +174,25 @@ public:
     void set_public(const bool p) { permissions_.is_public = p; }
 
 private:
-    std::string id_;                
-    std::string entity_;            
-    std::string original_entity_;   
-    std::string published_at_;      
-    std::string received_at_;        
-    std::string type_;
+    std::string id_;                    // Import
+    std::string entity_;                // Import
+    std::string original_entity_;       // Import
+    std::string published_at_;          // Optional
+    std::string received_at_;           // Import
+    std::string type_;                  // Required
+
+    MentionList     mentions_;          // Optional
+    RefList         refs_;              // Optional
+    LicenseList     licenses_;          // Optional
+    AttachmentList  attachments_;       // Optional
+
+    Version         version_;           // Optional
+    App             app_;               // Import
+    Permissions     permissions_;       // Optional
+    Content         content_;           // Optional
 
     std::string base_type_;
     std::string fragment_;
-
-    MentionList     mentions_;
-    RefList         refs_;
-    LicenseList     licenses_;
-    AttachmentList  attachments_;
-
-    Version         version_;
-    App             app_;
-    Permissions     permissions_;
-    Content         content_;
 };
 
 

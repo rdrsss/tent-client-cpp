@@ -4,14 +4,46 @@
 
 namespace tent {
 
-void Group::Serialize(JsonVal& root, JsonAllocator& alloc) {}
+void Group::Serialize(JsonVal& root, JsonAllocator& alloc) {
+    if(!post.empty())               root.AddMember("post", post.c_str(), alloc);
+    if(entities.size())
+        SerializeEntityList(root, alloc);
+}
+
+void Group::SerializeEntityList(JsonVal& root, JsonAllocator& alloc) {
+    JsonVal pval(rapidjson::kArrayType);
+    auto itr = entities.begin();
+    for(;itr!=entities.end(); itr++) {
+        JsonVal p(rapidjson::kObjectType);
+        itr->Serialize(p, alloc);
+        pval.PushBack(p, alloc);
+    }
+    root.AddMember("entities", pval, alloc);
+}
+
 void Group::Deserialize(JsonVal& root, JsonAllocator& alloc) {}
 std::string Group::SerializeAsString(){
     std::string str;
     return str;
 }
 
-void Permissions::Serialize(JsonVal& root, JsonAllocator& alloc) {}
+void Permissions::Serialize(JsonVal& root, JsonAllocator& alloc) {
+    root.AddMember("public", is_public, alloc);
+    if(groups.size())
+        SerializeGroupList(root, alloc);
+}
+
+void Permissions::SerializeGroupList(JsonVal& root, JsonAllocator& alloc) {
+    JsonVal pval(rapidjson::kArrayType);
+    auto itr = groups.begin();
+    for(;itr!=groups.end(); itr++) {
+        JsonVal p(rapidjson::kObjectType);
+        itr->Serialize(p, alloc);
+        pval.PushBack(p, alloc);
+    }
+    root.AddMember("groups", pval, alloc);
+}
+
 void Permissions::Deserialize(JsonVal& root, JsonAllocator& alloc) {}
 std::string Permissions::SerializeAsString(){
     std::string str;
